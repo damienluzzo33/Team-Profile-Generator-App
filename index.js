@@ -4,7 +4,7 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const partyPeople = [];
-const htmlArray = [];
+const allTeamMembers = [];
 let fullName, id, email, alt, altLabel, icon, role, altStuff, obj;
 
 // create function for generalized text validation for text response questions
@@ -170,7 +170,7 @@ function addIntern() {
             menuPrompt();
         })
 }
-
+// create function to parse the data received and create a manageable and dynamic 
 function finishTeam() {
     // loop through the objects in the party people array
     for (let people of partyPeople) {
@@ -179,7 +179,7 @@ function finishTeam() {
         id = people.getId();
         email = people.getEmail();
         role = people.getRole();
-        /
+        // conditionally call methods and create icons based on employee type
         if (role === "Manager") {
             alt = people.getOfficeNum();
             altLabel = "Office";
@@ -193,7 +193,8 @@ function finishTeam() {
             altLabel = "GitHub";
             icon = `<i class="fas fa-glasses"></i>`;
         }
-        obj = {
+        // create object from rendered values
+        teamMemberObject = {
             fullName: fullName,
             id: id,
             email: email,
@@ -202,12 +203,15 @@ function finishTeam() {
             role: role,
             icon: icon
         }
-        htmlArray.push(obj);
+        // after looping through all team member submissions, push the object with team member data onto the 
+        allTeamMembers.push(teamMemberObject);
     }
-    generateHtml(htmlArray);
+    // call function to generate html based on data passed in
+    generateHtml(allTeamMembers);
 }
-
-function generateHtml(htmlArray) {
+// create function to generate html text dynamically
+function generateHtml(team) {
+    // add initial html to the htmlString
     let htmlString = `
 <!DOCTYPE html>
 <html lang="en">
@@ -233,24 +237,27 @@ function generateHtml(htmlArray) {
 
     <div id="team-cards" class="container d-flex flex-wrap justify-content-center align-items-center">
     `;
-    for (let employee of htmlArray) {
-        if (employee.altLabel === "GitHub") altStuff = `<a href="https://github.com/${employee.alt}">${employee.alt}</a>`;
-        else altStuff = employee.alt;
+    // loop through the team members in the team data array and dynamically insert data into team member bootstrap card
+    for (let teamMember of team) {
+        // if the team member has a github profile, then dynamically create a link to the github profile
+        if (teamMember.altLabel === "GitHub") altStuff = `<a href="https://github.com/${teamMember.alt}">${teamMember.alt}</a>`;
+        else altStuff = teamMember.alt;
         htmlString = htmlString.concat(`
 <div class="card m-2" style="width: 20rem;">
     <div class="card-body">
-        <h5 class="card-title">${employee.fullName}</h5>
-        <h5 class="card-title">${employee.icon} ${employee.role}</h5>
+        <h5 class="card-title">${teamMember.fullName}</h5>
+        <h5 class="card-title">${teamMember.icon} ${teamMember.role}</h5>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID: ${employee.id}</li>
-        <li class="list-group-item"><a href="mailto:${employee.email}"Email: ${employee.email}</a></li>
-        <li class="list-group-item">${employee.altLabel}: ${altStuff}</li>
+        <li class="list-group-item">ID: ${teamMember.id}</li>
+        <li class="list-group-item"><a href="mailto:${teamMember.email}"Email: ${teamMember.email}</a></li>
+        <li class="list-group-item">${teamMember.altLabel}: ${altStuff}</li>
     </ul>
 </div>
 `
         )
     }
+    // add ending html to the html string
     htmlString = htmlString.concat(`
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
@@ -260,13 +267,16 @@ function generateHtml(htmlArray) {
 
 </html>`
     )
+    // call the function to create the html file for the html string created
     createHtmlFile(htmlString);
 }
 
+// create function to use fs to create an index.html that displays team members
 function createHtmlFile(html) {
     fs.writeFile("index.html", `${html}`, (err) => {
         err ? console.log(err) : console.log("Your HTML Document Was Successfully Generated!")
     })
 }
 
+// initialize app when index.js is run in the console
 managerPrompt();
