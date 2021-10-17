@@ -1,12 +1,16 @@
+// import fs and inquirer
 const fs = require("fs");
 const inquirer = require("inquirer");
+// import the Intern, Manager, and Engineer classes
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
+// create empty array to collect user entries from inquirer prompts
 const partyPeople = [];
+// create empty array to collect team member data from class methods/properties
 const allTeamMembers = [];
+// declare global variables
 let fullName, id, email, alt, altLabel, icon, role, altStuff, obj;
-
 // create function for generalized text validation for text response questions
 function validatorText(response) {
     // Make sure the response is not a number, and that it exists
@@ -225,7 +229,7 @@ function generateHtml(team) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./dist/styles.css">
-    <title>Title</title>
+    <title>My Team</title>
 </head>
 
 <body>
@@ -270,13 +274,11 @@ function generateHtml(team) {
     // call the function to create the html file for the html string created
     createHtmlFile(htmlString);
 }
-
 // create function to use fs to create an index.html that displays team members
 function createHtmlFile(html) {
     fs.writeFile("index.html", `${html}`, (err) => {
         err ? console.log(err) : console.log("Your HTML Document Was Successfully Generated!")
     })
 }
-
 // initialize app when index.js is run in the console
 managerPrompt();

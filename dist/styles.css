@@ -1,21 +1,22 @@
+/* Create some space above and below card holder */
 #team-cards {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-
+/* style the navbar */
 .navbar {
     background-color: darkcyan;
     height: 80px;
 }
-
+/* increase font size of title text */
 #title-text {
     font-size: 30px;
 }
-
+/* create separation between icon and title */
 .fa-user-friends {
     margin-right: 20px;
 }
-
+/* add styles to each card */
 .card-body {
     background-color: darkcyan;
     color: white;
@@ -23,11 +24,11 @@
     flex-direction: column;
     align-items: center;
 }
-
+/* give cards a box shadow */
 .card {
     box-shadow: 1px 1px 5px black;
 }
-
+/* style the list items inside each card */
 .list-group-item {
     background-color: rgb(212, 212, 212);
     font-weight: bold;
