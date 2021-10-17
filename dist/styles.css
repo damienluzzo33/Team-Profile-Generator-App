@@ -1,0 +1,34 @@
+#team-cards {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.navbar {
+    background-color: darkcyan;
+    height: 80px;
+}
+
+#title-text {
+    font-size: 30px;
+}
+
+.fa-user-friends {
+    margin-right: 20px;
+}
+
+.card-body {
+    background-color: darkcyan;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    box-shadow: 1px 1px 5px black;
+}
+
+.list-group-item {
+    background-color: rgb(212, 212, 212);
+    font-weight: bold;
+}

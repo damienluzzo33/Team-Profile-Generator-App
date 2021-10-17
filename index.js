@@ -1,19 +1,19 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
-
 const partyPeople = [];
+const htmlArray = [];
+let fullName, id, email, alt, altLabel, icon, role, altStuff, obj;
 
-// create function for generalized validation for questions that are required for the README
+// create function for generalized text validation for text response questions
 function validatorText(response) {
     // Make sure the response is not a number, and that it exists
 	let validation = response && isNaN(response) ? true : 'This response is required & it needs to be text! Try again!'
 	return validation;
 };
-
+// create function for generalized number validation for number response questions
 function validatorNumber(response) {
     // Make sure the response is not a number, and that it exists
 	let validation = response && !isNaN(response) ? true : 'This response is required & it need to be a number! Try again!'
@@ -52,12 +52,11 @@ function managerPrompt() {
         .then((answers) => {
             console.log(answers);
             const { managerName, managerID, managerEmail, officeNum } = answers;
-
+            // create instance of Manager class
             const manager = new Manager(managerName, managerID, managerEmail, officeNum);
-            
-            console.log(manager);
+            // push manager instance onto the party people array
             partyPeople.push(manager);
-
+            // call the menu prompt function
             menuPrompt();
         });
 }
@@ -123,12 +122,11 @@ function addEngineer() {
         .then((answers) => {
             console.log(answers);
             const { engineerName, engineerID, engineerEmail, engineerGitHub } = answers;
-
+            // create instance of Engineer class
             const engineer = new Engineer(engineerName, engineerID, engineerEmail, engineerGitHub);
-            
-            console.log(engineer);
+            // push engineer instance onto the party people array
             partyPeople.push(engineer);
-
+            // call the menu prompt function
             menuPrompt();
         })
 }
@@ -164,51 +162,43 @@ function addIntern() {
         .then((answers) => {
             console.log(answers);
             const { internName, internID, internEmail, internSchool } = answers;
-
+            // create instance of Intern class
             const intern = new Intern(internName, internID, internEmail, internSchool);
-            
-            console.log(intern);
+            // push intern instance onto the party people array
             partyPeople.push(intern);
-
+            // call the menu prompt function
             menuPrompt();
         })
 }
 
-let htmlArray = [];
-let name, id, email, extra, extraName, icon;
-
 function finishTeam() {
-    console.log("We're finished!")
+    // loop through the objects in the party people array
     for (let people of partyPeople) {
-        let role = people.getRole();
+        // get name, id, email, and role from objects using employee methods
+        fullName = people.getName();
+        id = people.getId();
+        email = people.getEmail();
+        role = people.getRole();
+        /
         if (role === "Manager") {
-            name = people.getName();
-            id = people.getId();
-            email = people.getEmail();
-            extra = people.getOfficeNum();
-            extraName = "Office";
-            icon = `<i class="fas fa-mug-hot"></i>`;
+            alt = people.getOfficeNum();
+            altLabel = "Office";
+            icon = `<i class="fas fa-coffee"></i>`;
         } else if (role === "Intern") {
-            name = people.getName();
-            id = people.getId();
-            email = people.getEmail();
-            extra = people.getSchool();
-            extraName = "School";
-            icon = `<i class="fas fa-user-graduate"></i>`;
+            alt = people.getSchool();
+            altLabel = "School";
+            icon = `<i class="fas fa-graduation-cap"></i>`;
         } else if (role === "Engineer") {
-            name = people.getName();
-            id = people.getId();
-            email = people.getEmail();
-            extra = people.getGithub();
-            extraName = "GitHub";
-            icon = `<i class="fas fa-atom"></i>`;
+            alt = people.getGithub();
+            altLabel = "GitHub";
+            icon = `<i class="fas fa-glasses"></i>`;
         }
-        let obj = {
-            name: name,
+        obj = {
+            fullName: fullName,
             id: id,
             email: email,
-            extraName: extraName,
-            extra: extra,
+            altLabel: altLabel,
+            alt: alt,
             role: role,
             icon: icon
         }
@@ -219,64 +209,63 @@ function finishTeam() {
 
 function generateHtml(htmlArray) {
     let htmlString = `
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="Description" content="Enter your description here" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <title>Title</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./dist/styles.css">
+    <title>Title</title>
+</head>
 
-    <body>
+<body>
+    <nav class="navbar navbar-dark justify-content-center">
+        <span id="title-text" class="navbar-brand mb-0 h1">
+            <i class="fas fa-user-friends"></i>My Team
+        </span>
+    </nav>
 
-        <div id="team-cards" class="container d-flex flex-wrap justify-content-center align-items-center">
+    <div id="team-cards" class="container d-flex flex-wrap justify-content-center align-items-center">
     `;
-    console.log(htmlString);
-    let extraStuff;
     for (let employee of htmlArray) {
-        if (employee.extraName === "GitHub") {
-            extraStuff = `<a href="https://github.com/${employee.extra}">${employee.extra}</a>`
-        } else {
-            extraStuff = employee.extra;
-        }
-        htmlString = htmlString.concat(
-            `<div class="card" style="width: 18rem;">
-                <div class="card-body" style="background-color: blue">
-                    <h5 class="card-title">${employee.name}</h5>
-                    <h5 class="card-title">${employee.icon} ${employee.role}</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${employee.id}</li>
-                    <li class="list-group-item">Email: ${employee.email}</li>
-                    <li class="list-group-item">${employee.extraName}: ${extraStuff}</li>
-                </ul>
-            </div>`
+        if (employee.altLabel === "GitHub") altStuff = `<a href="https://github.com/${employee.alt}">${employee.alt}</a>`;
+        else altStuff = employee.alt;
+        htmlString = htmlString.concat(`
+<div class="card m-2" style="width: 20rem;">
+    <div class="card-body">
+        <h5 class="card-title">${employee.fullName}</h5>
+        <h5 class="card-title">${employee.icon} ${employee.role}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${employee.id}</li>
+        <li class="list-group-item"><a href="mailto:${employee.email}"Email: ${employee.email}</a></li>
+        <li class="list-group-item">${employee.altLabel}: ${altStuff}</li>
+    </ul>
+</div>
+`
         )
     }
-    console.log(htmlString);
-    htmlString = htmlString.concat(
-        `</div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-        </body>
-        
-        </html>`
+    htmlString = htmlString.concat(`
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>`
     )
-    console.log(htmlString);
-    writeHtml(htmlString);
+    createHtmlFile(htmlString);
 }
 
-function writeHtml(data) {
-    fs.writeFile("index.html", `${data}`, (err) => {
-        err ? console.log(err) : console.log("It works!")
+function createHtmlFile(html) {
+    fs.writeFile("index.html", `${html}`, (err) => {
+        err ? console.log(err) : console.log("Your HTML Document Was Successfully Generated!")
     })
 }
 
