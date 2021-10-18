@@ -29,6 +29,7 @@ describe("Intern", () => {
     })
     // test the getId method
     describe("getId", () => {
+        // should return the ID property as defined in constructor
         it("should return ID of the intern instance that was created", () => {
             // make instance of Intern and store it in a variable
             const intern3 = new Intern("damien", 123, "damienluzzo33@gmail.com", "UC Santa Barbara");
@@ -40,6 +41,7 @@ describe("Intern", () => {
     })
     // test the getEmail method
     describe("getEmail", () => {
+        // should return the email property as defined in constructor
         it("should return email of the Intern instance that was created", () => {
             // make instance of Intern and store it in a variable
             const intern4 = new Intern("damien", 123, "damienluzzo33@gmail.com", "UC Santa Barbara");

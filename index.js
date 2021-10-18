@@ -63,7 +63,7 @@ function managerPrompt() {
             // call the menu prompt function
             menuPrompt();
         });
-}
+};
 // Present user with the options to add an engineer, add an intern, or finish building their team
 function menuPrompt() {
     inquirer
@@ -73,6 +73,7 @@ function menuPrompt() {
                 name: 'menuOption',
                 message: "What would you like to do next?",
                 choices: [
+                    "Add Another Manager",
                     "Add An Engineer",
                     "Add An Intern",
                     "Finish Building My Team"
@@ -80,8 +81,11 @@ function menuPrompt() {
             }
         ])
         .then((selection) => {
-            // if they want to add engineer, call engineer questions function
-            if (selection.menuOption === "Add An Engineer") {  
+            // if they want to add another manager, call manager questions function
+            if (selection.menuOption === "Add Another Manager") {
+                managerPrompt();
+                // else if they want to add engineer, call engineer questions function
+            } else if (selection.menuOption === "Add An Engineer") {  
                 addEngineer();
                 // else if they want to add inter, call intern questions function
             } else if (selection.menuOption === "Add An Intern") {
@@ -93,7 +97,7 @@ function menuPrompt() {
                 console.log("SOMETHING WENT WRONG!")
             }
         })
-}
+};
 // Prompt user to enter the engineer’s name, ID, email, and GitHub username
 function addEngineer() {
     inquirer
@@ -133,7 +137,7 @@ function addEngineer() {
             // call the menu prompt function
             menuPrompt();
         })
-}
+};
 // Prompt user to enter the engineer’s name, ID, email, and GitHub username
 function addIntern() {
     inquirer
@@ -173,7 +177,7 @@ function addIntern() {
             // call the menu prompt function
             menuPrompt();
         })
-}
+};
 // create function to parse the data received and create a manageable and dynamic 
 function finishTeam() {
     // loop through the objects in the party people array
@@ -212,7 +216,7 @@ function finishTeam() {
     }
     // call function to generate html based on data passed in
     generateHtml(allTeamMembers);
-}
+};
 // create function to generate html text dynamically
 function generateHtml(team) {
     // add initial html to the htmlString
@@ -273,12 +277,12 @@ function generateHtml(team) {
     )
     // call the function to create the html file for the html string created
     createHtmlFile(htmlString);
-}
+};
 // create function to use fs to create an index.html that displays team members
 function createHtmlFile(html) {
     fs.writeFile("index.html", `${html}`, (err) => {
         err ? console.log(err) : console.log("Your HTML Document Was Successfully Generated!")
     })
-}
+};
 // initialize app when index.js is run in the console
 managerPrompt();
