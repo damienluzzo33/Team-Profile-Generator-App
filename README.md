@@ -4,7 +4,7 @@
 
 Today's team-driven environment demands simple ways to display and store information about your team members and their roles. This Team Profile Generator was created to make the process of creating a webpage that displays your team members simple for anyone regardless of their coding experience.
 
-Knowledge of HTML isn't needed in order to use this app. Simply launch the app in your console, answer some simple questions about your team members, and watch the document render itself for you. Tired of needing to relearn HTML everytime you want to create a basic HTML document? Then use the Team Profile Generator and keep your stress at bay.
+Knowledge of HTML isn't needed in order to use this app. Simply launch the app in your console, answer some simple questions about your team members, and watch the document render itself for you. Tired of needing to relearn HTML every time you want to create a basic HTML document? Then use the Team Profile Generator and keep your stress at bay.
 
 If you are interested in improving or modifying this application for your own personal usage, please go ahead and clone down the repository and transform it into your own amazing Team Profile Generator.
 
@@ -72,3 +72,5 @@ If you would like to contribute to this Team Profile Generator project, please f
 ## Examples
 
 Validators are in place to prevent you from inputting incorrect response types, so all you have to do to use this application is follow the prompts and submit your responses to the questions.
+
+To see an example for how to answer the questions, and what the generated HTML document should look like, please refer to the video in the description above.
