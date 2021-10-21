@@ -1,4 +1,4 @@
-# Team-Profile-Generator-App
+# Team Profile Generator App
 
 ## Description
 
