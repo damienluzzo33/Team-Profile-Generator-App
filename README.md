@@ -8,7 +8,9 @@ Knowledge of HTML isn't needed in order to use this app. Simply launch the app i
 
 If you are interested in improving or modifying this application for your own personal usage, please go ahead and clone down the repository and transform it into your own amazing Team Profile Generator.
 
->Enter giphy demo here
+[Link to video demo of app](https://drive.google.com/file/d/1-oqB2uA8UGBhoTxMVBiuzdc-nOAAAjc5/view?usp=sharing)
+
+![Giphy demo of project](https://media.giphy.com/media/lcXFNTzlQKvmoConp6/giphy.gif)
 
 ## Table of Contents
 
@@ -34,10 +36,10 @@ If you are interested in improving or modifying this application for your own pe
 Screenshots:
 
 Desktop:
-![Desktop view of application](assets/images/Team-Profile-Generator-screenshot-desktop-view.png)
+![Desktop view of application](assets/images/new_screenshot_dexktop_view.png)
 
 Mobile:
-![Mobile view of application](assets/images/Team-Profile-Generator-screenshot-mobile.png)
+![Mobile view of application](assets/images/new_screenshot_mobile_view.png)
 
 ## Credits
 

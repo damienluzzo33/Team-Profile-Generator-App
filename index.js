@@ -181,8 +181,9 @@ function finishTeam() {
 		.prompt([
 			{
 				type: 'input',
-				name: 'title',
-				massage: 'What is the name of your team? (Ex: The Avengers) '
+				name: 'Team',
+				massage: 'What is the name of your team? (Ex: The Avengers) ',
+				validate: validatorText
 			}
 		])
 		.then((answers) => {
@@ -242,7 +243,7 @@ function generateHtml(team, name) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./dist/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <title>${name}</title>
 </head>
 
@@ -270,7 +271,7 @@ function generateHtml(team, name) {
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${teamMember.id}</li>
-        <li class="list-group-item"><a href="mailto:${teamMember.email}"Email: ${teamMember.email}</a></li>
+        <li class="list-group-item"><a href="mailto:${teamMember.email}">Email: ${teamMember.email}</a></li>
         <li class="list-group-item">${teamMember.altLabel}: ${altStuff}</li>
     </ul>
 </div>

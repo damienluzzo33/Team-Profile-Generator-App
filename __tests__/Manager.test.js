@@ -63,4 +63,16 @@ describe("Manager", () => {
             expect(result).toEqual("Manager");
         })
     })
+    // test the getOfficeNum method
+    describe("getOffice", () => {
+        // should return the office number of the manager
+        it("should return office number", () => {
+            // make instance of Manager and store it in a variable
+            const manager6 = new Manager("damien", 123, "damienluzzo33@gmail.com", 990);
+            // use the getOfficeNum method and store result in variable
+            const result = manager6.getOfficeNum();
+            // make sure the result returned is correct
+            expect(result).toEqual(990);
+        })
+    })
 })

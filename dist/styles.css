@@ -5,7 +5,7 @@
 }
 /* style the navbar */
 .navbar {
-    background-color: darkcyan;
+    background-color: rgb(173, 10, 10);
     height: 80px;
 }
 /* increase font size of title text */
@@ -18,7 +18,7 @@
 }
 /* add styles to each card */
 .card-body {
-    background-color: darkcyan;
+    background-color: rgb(173, 10, 10);
     color: white;
     display: flex;
     flex-direction: column;
