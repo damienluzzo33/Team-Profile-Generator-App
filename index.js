@@ -7,7 +7,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 // create empty array to collect user entries from inquirer prompts
 const myTeamMembers = [];
-// create empty array to collect team member data from class methods/properties
+// create empty array to collect team member data from class properties
 const allTeamMembers = [];
 // declare global variables
 let fullName, id, email, alt, altLabel, icon, role, altStuff, teamMemberObject, teamNameResponse;
@@ -16,15 +16,14 @@ function validatorText(response) {
 	// Make sure the response is not a number, and that it exists
 	let validation = response && isNaN(response) ? true : 'This response is required & it needs to be text! Try again!';
 	return validation;
-}
+};
 // create function for generalized number validation for number response questions
 function validatorNumber(response) {
 	// Make sure the response is not a number, and that it exists
 	let validation =
 		response && !isNaN(response) ? true : 'This response is required & it need to be a number! Try again!';
 	return validation;
-}
-
+};
 // Prompt user to enter team manager name, employee ID, email address, office number
 function managerPrompt() {
 	inquirer
@@ -65,7 +64,7 @@ function managerPrompt() {
 			// call the menu prompt function
 			menuPrompt();
 		});
-}
+};
 // Present user with the options to add an engineer, add an intern, or finish building their team
 function menuPrompt() {
 	inquirer
@@ -94,7 +93,7 @@ function menuPrompt() {
 				console.log('SOMETHING WENT WRONG!');
 			}
 		});
-}
+};
 // Prompt user to enter the engineer’s name, ID, email, and GitHub username
 function addEngineer() {
 	inquirer
@@ -134,7 +133,7 @@ function addEngineer() {
 			// call the menu prompt function
 			menuPrompt();
 		});
-}
+};
 // Prompt user to enter the engineer’s name, ID, email, and GitHub username
 function addIntern() {
 	inquirer
@@ -174,25 +173,9 @@ function addIntern() {
 			// call the menu prompt function
 			menuPrompt();
 		});
-}
-
-function teamName() {
-	inquirer
-		.prompt([
-			{
-				type: 'input',
-				name: 'title',
-				massage: 'What is the name of your team? (Ex: The Avengers) '
-			}
-		])
-		.then((answers) => {
-			let teamNameResponse = answers.title;
-			return teamNameResponse;
-		});
-}
-
+};
 // create function to parse the data received and create a manageable and dynamic
-const finishTeam = () => {
+function finishTeam() {
 	// call the team name function
 	inquirer
 		.prompt([
@@ -244,7 +227,6 @@ const finishTeam = () => {
 			generateHtml(allTeamMembers, teamNameResponse);
 		});
 };
-
 // create function to generate html text dynamically
 function generateHtml(team, name) {
 	// add initial html to the htmlString
@@ -279,6 +261,7 @@ function generateHtml(team, name) {
 		if (teamMember.altLabel === 'GitHub')
 			altStuff = `<a href="https://github.com/${teamMember.alt}">${teamMember.alt}</a>`;
 		else altStuff = teamMember.alt;
+
 		htmlString = htmlString.concat(`
 <div class="card m-2" style="min-width: 20rem;">
     <div class="card-body">
@@ -304,12 +287,13 @@ function generateHtml(team, name) {
 </html>`);
 	// call the function to create the html file for the html string created
 	createHtmlFile(htmlString);
-}
+};
 // create function to use fs to create an index.html that displays team members
 function createHtmlFile(html) {
+	// write HTML file into the dist folder
 	fs.writeFile('dist/index.html', `${html}`, (err) => {
 		err ? console.log(err) : console.log('Your HTML Document Was Successfully Generated!');
 	});
-}
+};
 // initialize app when index.js is run in the console
 managerPrompt();

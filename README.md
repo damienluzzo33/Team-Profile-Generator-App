@@ -74,3 +74,9 @@ If you would like to contribute to this Team Profile Generator project, please f
 Validators are in place to prevent you from inputting incorrect response types, so all you have to do to use this application is follow the prompts and submit your responses to the questions.
 
 To see an example for how to answer the questions, and what the generated HTML document should look like, please refer to the video in the description above.
+
+## Questions
+
+Connect with me on GitHub: [damienluzzo33](https://www.github.com/damienluzzo33)
+
+Shoot me an email: [damienluzzo33@gmail.com](mailto:damienluzzo33@gmail.com)
